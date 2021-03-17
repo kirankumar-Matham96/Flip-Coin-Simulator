@@ -2,12 +2,18 @@
 
 Heads=1
 Tails=0
+headCount=0
+tailCount=0
+for((i=1;i<=10;i++))
+do
+	result=$((RANDOM%2))
+	if [ $result -eq $Heads ]
+	then
+		((headCount++))
+	else
+		((tailCount++))
+	fi
+done
 
-result=$((RANDOM%2))
-
-if [ $result -eq $Heads ]
-then
-	echo "Heads wins"
-else
-	echo "Tails wins"
-fi
+echo "Heads won $headCount times"
+echo "Tails won $tailCount times"
