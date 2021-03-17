@@ -4,16 +4,31 @@ Heads=1
 Tails=0
 headCount=0
 tailCount=0
-for((i=1;i<=10;i++))
+while [ true ]
 do
 	result=$((RANDOM%2))
 	if [ $result -eq $Heads ]
 	then
 		((headCount++))
+		if [ $headCount -eq 21 ]
+		then
+			break
+		fi
 	else
 		((tailCount++))
+		if [ $tailCount -eq 21 ]
+		then
+			break
+		fi
 	fi
 done
 
-echo "Heads won $headCount times"
-echo "Tails won $tailCount times"
+if [ $headCount -eq $tailCount ]
+then
+	echo "Its a tie!"
+elif [ $headCount -gt $tailCount ]
+then
+	echo "Heads won by $(($headCount-$tailCount)) majority"
+else
+	echo "Tails won by $(($tailCount-$headCount)) majority"
+fi
